@@ -2,10 +2,8 @@
 
 .preview {
   border: 1px solid black;
-  width: 520px; /* Change as necessary */
+  width: 40%; /* Change as necessary */
   max-height: calc(520px * 1.294);
-  margin-left: auto;
-  margin-right: 100px;
   height: 80vh;
   font-family: "Montserrat", sans-serif;
   padding: 30px;
