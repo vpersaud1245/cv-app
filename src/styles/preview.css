@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+.preview {
+  border: 1px solid black;
+  width: 520px; /* Change as necessary */
+  max-height: calc(520px * 1.294);
+  margin-left: auto;
+  margin-right: 100px;
+  height: 80vh;
+  font-family: "Montserrat", sans-serif;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview__personal-information {
+  letter-spacing: 4px;
+}
+
+.personal-information__full-name {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 300;
+}
+
+.personal-inforamtion__full-name--last {
+  font-weight: 500;
+}
+
+hr {
+  border-top: 1px solid gray;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
+.personal-information__professional-title {
+  text-align: center;
+  margin: 0;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.preview__main-content {
+  margin-top: 20px;
+  font-size: 8px;
+  display: flex;
+  gap: 10px;
+  flex-grow: 1;
+  text-transform: uppercase;
+  line-height: 1.5em;
+  font-weight: 300;
+}
+
+.vl {
+  border-left: 1px solid gray;
+  height: inherit;
+}
+
+.content__title {
+  font-size: 8px;
+  letter-spacing: 4px;
+  font-weight: 500;
+}
+
+.main-content--left {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.education__degree,
+.education__school,
+.education__dates {
+  font-size: 8px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.education__degree {
+  padding: 0 0 10px 0;
+}
+
+.work-experience__position-and-dates {
+  display: flex;
+  justify-content: space-between;
+}
+
+.position-and-dates__dates {
+  display: flex;
+  gap: 10px;
+}
+
+.work-experience__company-name {
+  font-size: 8px;
+}
+.work-experience__description {
+  text-transform: none;
+}
+
+.skills__list {
+  list-style: none;
+  padding: 0;
+}
