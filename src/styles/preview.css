@@ -42,6 +42,7 @@ hr {
   margin: 0;
   font-size: 8px;
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 .preview__main-content {

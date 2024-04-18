@@ -5,6 +5,8 @@ import { useState } from "react";
 export default function ResumeBuilder() {
   const [firstName, setFirstName] = useState("First");
   const [lastName, setLastName] = useState("Last");
+  const [professionalTitle, setProfessionalTitle] =
+    useState("Professional Title");
 
   return (
     <div className="resume-wrapper">
@@ -35,6 +37,13 @@ export default function ResumeBuilder() {
             className="personal-information__professional-title-input"
             type="text"
             placeholder="Professional Title"
+            onChange={(e) =>
+              setProfessionalTitle(
+                e.target.value.length > 0
+                  ? e.target.value
+                  : "Professional Title"
+              )
+            }
           />
         </form>
         <form action="" className="edit-form__profile">
@@ -162,7 +171,11 @@ export default function ResumeBuilder() {
           />
         </form>
       </div>
-      <Preview firstName={firstName} lastName={lastName} />
+      <Preview
+        firstName={firstName}
+        lastName={lastName}
+        professionalTitle={professionalTitle}
+      />
     </div>
   );
 }

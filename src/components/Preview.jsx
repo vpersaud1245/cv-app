@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import "../styles/preview.css";
 
-function PersonalInformation({ firstName, lastName }) {
+function PersonalInformation({ firstName, lastName, professionalTitle }) {
   return (
     <div className="preview__personal-information">
       <h1 className="personal-information__full-name">
@@ -14,7 +14,7 @@ function PersonalInformation({ firstName, lastName }) {
       </h1>
       <hr />
       <h2 className="personal-information__professional-title">
-        PROFESSIONAL TITLE
+        {professionalTitle}
       </h2>
       <hr />
     </div>
@@ -114,10 +114,14 @@ function MainContent() {
   );
 }
 
-export default function Preview({ firstName, lastName }) {
+export default function Preview({ firstName, lastName, professionalTitle }) {
   return (
     <div className="preview">
-      <PersonalInformation firstName={firstName} lastName={lastName} />
+      <PersonalInformation
+        firstName={firstName}
+        lastName={lastName}
+        professionalTitle={professionalTitle}
+      />
       <MainContent />
     </div>
   );
