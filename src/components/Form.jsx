@@ -7,6 +7,9 @@ export default function ResumeBuilder() {
   const [lastName, setLastName] = useState("Last");
   const [professionalTitle, setProfessionalTitle] =
     useState("Professional Title");
+  const [profileContent, setProfileContent] = useState(
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui quod fuga corrupti quam laboriosam obcaecati provident, iure ducimus similique voluptatum commodi labore. Sunt perspiciatis odio nulla vero, itaque nam architecto."
+  );
 
   return (
     <div className="resume-wrapper">
@@ -54,6 +57,14 @@ export default function ResumeBuilder() {
             rows="4"
             cols="50"
             placeholder="About yourself"
+            onChange={(e) => {
+              console.log(e.target.value);
+              setProfileContent(
+                e.target.value.length > 0
+                  ? e.target.value
+                  : "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui quod fuga corrupti quam laboriosam obcaecati provident, iure ducimus similique voluptatum commodi labore. Sunt perspiciatis odio nulla vero, itaque nam architecto."
+              );
+            }}
           ></textarea>
         </form>
         <form action="" className="edit-form__education">
@@ -175,6 +186,7 @@ export default function ResumeBuilder() {
         firstName={firstName}
         lastName={lastName}
         professionalTitle={professionalTitle}
+        profileContent={profileContent}
       />
     </div>
   );

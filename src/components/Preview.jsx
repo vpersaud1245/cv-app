@@ -21,16 +21,11 @@ function PersonalInformation({ firstName, lastName, professionalTitle }) {
   );
 }
 
-function Profile() {
+function Profile({ profileContent }) {
   return (
     <div className="main-content__profile">
       <h1 className="content__title">PROFILE</h1>
-      <p className="profile__content">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui quod fuga
-        corrupti quam laboriosam obcaecati provident, iure ducimus similique
-        voluptatum commodi labore. Sunt perspiciatis odio nulla vero, itaque nam
-        architecto.
-      </p>
+      <p className="profile__content">{profileContent}</p>
     </div>
   );
 }
@@ -97,11 +92,11 @@ function WorkExperience() {
   );
 }
 
-function MainContent() {
+function MainContent({ profileContent }) {
   return (
     <div className="preview__main-content">
       <div className="main-content--left">
-        <Profile />
+        <Profile profileContent={profileContent} />
         <Contact />
         <Education />
         <Skills />
@@ -114,7 +109,12 @@ function MainContent() {
   );
 }
 
-export default function Preview({ firstName, lastName, professionalTitle }) {
+export default function Preview({
+  firstName,
+  lastName,
+  professionalTitle,
+  profileContent,
+}) {
   return (
     <div className="preview">
       <PersonalInformation
@@ -122,7 +122,7 @@ export default function Preview({ firstName, lastName, professionalTitle }) {
         lastName={lastName}
         professionalTitle={professionalTitle}
       />
-      <MainContent />
+      <MainContent profileContent={profileContent} />
     </div>
   );
 }
