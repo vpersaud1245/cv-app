@@ -2,6 +2,14 @@ import "../styles/form.css";
 import Preview from "./Preview";
 import { useState } from "react";
 
+function formatDate(inputDate) {
+  const dateParts = inputDate.split("-"); // Split the input date by hyphens
+  const year = dateParts[0]; // Get the year part
+  const month = dateParts[1]; // Get the month part
+
+  return `${month}/${year}`; // Return the formatted date
+}
+
 export default function ResumeBuilder() {
   const [firstName, setFirstName] = useState("First");
   const [lastName, setLastName] = useState("Last");
@@ -10,6 +18,120 @@ export default function ResumeBuilder() {
   const [profileContent, setProfileContent] = useState(
     "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui quod fuga corrupti quam laboriosam obcaecati provident, iure ducimus similique voluptatum commodi labore. Sunt perspiciatis odio nulla vero, itaque nam architecto."
   );
+
+  const educationSection = [];
+  const [numOfEducationSections, setNumOfEducationSections] = useState(1);
+  const [educationData, setEducationData] = useState([
+    { id: 1, degree: "Degree", school: "School", start: "Start", end: "End" },
+  ]);
+  for (let i = 1; i <= numOfEducationSections; i += 1) {
+    educationSection.push(
+      <div className="education__section" key={i}>
+        {i > 1 && (
+          <button
+            className="education__remove-education-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              setEducationData(educationData.toSpliced(1, 1));
+              educationSection.pop();
+              setNumOfEducationSections(1);
+            }}
+          >
+            Remove
+          </button>
+        )}
+        <input
+          type="text"
+          className="education__school-input"
+          placeholder="School"
+          onChange={(e) => {
+            const changedEducationData = educationData.map((educationObj) => {
+              if (educationObj.id === i) {
+                return {
+                  ...educationObj,
+                  school: e.target.value.length > 0 ? e.target.value : "School",
+                };
+              } else return educationObj;
+            });
+            setEducationData(changedEducationData);
+          }}
+        />
+        <input
+          type="text"
+          className="education__degree-input"
+          placeholder="Degree"
+          onChange={(e) => {
+            const changedEducationData = educationData.map((educationObj) => {
+              if (educationObj.id === i) {
+                return {
+                  ...educationObj,
+                  degree: e.target.value.length > 0 ? e.target.value : "Degree",
+                };
+              } else return educationObj;
+            });
+            setEducationData(changedEducationData);
+          }}
+        />
+        <div className="education__date-wrapper">
+          <div className="education__start-date-wrapper">
+            <label htmlFor="education__start-date-input">Start Date</label>
+            <input
+              type="date"
+              className="education__start-date-input"
+              id="education__start-date-input"
+              onChange={(e) => {
+                const changedEducationData = educationData.map(
+                  (educationObj) => {
+                    if (educationObj.id === i) {
+                      return {
+                        ...educationObj,
+                        start:
+                          e.target.value.length > 0
+                            ? formatDate(e.target.value)
+                            : "Start",
+                      };
+                    } else return educationObj;
+                  }
+                );
+                console.log(e.target.value);
+                const endDateInput =
+                  e.target.parentElement.nextElementSibling.lastElementChild;
+                endDateInput.setAttribute("min", e.target.value);
+                setEducationData(changedEducationData);
+              }}
+            />
+          </div>
+          <div className="education__end-date-wrapper">
+            <label htmlFor="education__end-date-input">End Date</label>
+            <input
+              type="date"
+              className="education__end-date-input"
+              id="education__end-date-input"
+              onChange={(e) => {
+                const changedEducationData = educationData.map(
+                  (educationObj) => {
+                    if (educationObj.id === i) {
+                      return {
+                        ...educationObj,
+                        end:
+                          e.target.value.length > 0
+                            ? formatDate(e.target.value)
+                            : "End",
+                      };
+                    } else return educationObj;
+                  }
+                );
+                setEducationData(changedEducationData);
+              }}
+            />
+          </div>
+        </div>
+        {numOfEducationSections > 1 && i === 1 && (
+          <hr className="education__line-break"></hr>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="resume-wrapper">
@@ -49,6 +171,7 @@ export default function ResumeBuilder() {
             }
           />
         </form>
+
         <form action="" className="edit-form__profile">
           <h1 className="form__title">Profile</h1>
           <textarea
@@ -67,40 +190,33 @@ export default function ResumeBuilder() {
             }}
           ></textarea>
         </form>
+
         <form action="" className="edit-form__education">
           <h1 className="form__title">Education</h1>
-          <input
-            type="text"
-            className="education__school-input"
-            placeholder="School"
-          />
-          <input
-            type="text"
-            className="education__degree-input"
-            placeholder="Degree"
-          />
-          <div className="education__date-wrapper">
-            <div className="education__start-date-wrapper">
-              <label htmlFor="education__start-date-input">Start Date</label>
-              <input
-                type="date"
-                className="education__start-date-input"
-                id="education__start-date-input"
-              />
-            </div>
-            <div className="education__end-date-wrapper">
-              <label htmlFor="education__end-date-input">End Date</label>
-              <input
-                type="date"
-                className="education__end-date-input"
-                id="education__end-date-input"
-              />
-            </div>
-          </div>
-          <button className="education__add-education-btn">
-            + Add more education
-          </button>
+          {educationSection}
+          {numOfEducationSections < 2 && (
+            <button
+              className="education__add-education-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                setNumOfEducationSections(numOfEducationSections + 1);
+                setEducationData([
+                  ...educationData,
+                  {
+                    id: 2,
+                    degree: "Degree",
+                    school: "School",
+                    start: "Start",
+                    end: "End",
+                  },
+                ]);
+              }}
+            >
+              + Add more education
+            </button>
+          )}
         </form>
+
         <form action="" className="edit-form__work-experience">
           <h1 className="form__title">Work Experience</h1>
           <input
@@ -152,6 +268,7 @@ export default function ResumeBuilder() {
             + Add more work experience
           </button>
         </form>
+
         <form action="" className="edit-form__skills">
           <h1 className="form__title">Skills</h1>
           <input
@@ -161,6 +278,7 @@ export default function ResumeBuilder() {
           />
           <button className="skills__add-skill-btn">+ Add more skills</button>
         </form>
+
         <form action="" className="edit-form__contact">
           <h1 className="form__title">Contact</h1>
           <div className="contact__phone-email-wrapper">
@@ -187,6 +305,7 @@ export default function ResumeBuilder() {
         lastName={lastName}
         professionalTitle={professionalTitle}
         profileContent={profileContent}
+        educationData={educationData}
       />
     </div>
   );

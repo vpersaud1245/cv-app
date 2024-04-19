@@ -73,6 +73,10 @@ hr {
   gap: 30px;
 }
 
+.education__item {
+  margin-top: 10px;
+}
+
 .education__degree,
 .education__school,
 .education__dates {
@@ -82,7 +86,7 @@ hr {
 }
 
 .education__degree {
-  padding: 0 0 10px 0;
+  color: gray;
 }
 
 .work-experience__position-and-dates {

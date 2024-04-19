@@ -41,16 +41,22 @@ function Contact() {
   );
 }
 
-function Education() {
+function Education({ educationData }) {
+  const educationItems = educationData.map((educationObj) => (
+    <div className="education__item" key={educationObj.id}>
+      <h2 className="education__degree">{educationObj.degree}</h2>
+      <h3 className="education__school">{educationObj.school}</h3>
+      <h4 className="education__dates">
+        <span className="education__dates--start">{educationObj.start}</span>
+        <span> - </span>
+        <span className="education__dates--stop">{educationObj.end}</span>
+      </h4>
+    </div>
+  ));
   return (
     <div className="main-content__education">
-      <h1 className="content__title">TITLE</h1>
-      <h2 className="education__degree">DEGREE</h2>
-      <h3 className="education__school">SCHOOL</h3>
-      <h4 className="education__dates">
-        <span className="education__dates--start">START - </span>
-        <span className="education__dates--stop">END</span>
-      </h4>
+      <h1 className="content__title">EDUCATION</h1>
+      {educationItems}
     </div>
   );
 }
@@ -92,13 +98,13 @@ function WorkExperience() {
   );
 }
 
-function MainContent({ profileContent }) {
+function MainContent({ profileContent, educationData }) {
   return (
     <div className="preview__main-content">
       <div className="main-content--left">
         <Profile profileContent={profileContent} />
         <Contact />
-        <Education />
+        <Education educationData={educationData} />
         <Skills />
       </div>
       <div className="vl"></div>
@@ -114,6 +120,7 @@ export default function Preview({
   lastName,
   professionalTitle,
   profileContent,
+  educationData,
 }) {
   return (
     <div className="preview">
@@ -122,7 +129,10 @@ export default function Preview({
         lastName={lastName}
         professionalTitle={professionalTitle}
       />
-      <MainContent profileContent={profileContent} />
+      <MainContent
+        profileContent={profileContent}
+        educationData={educationData}
+      />
     </div>
   );
 }

@@ -11,6 +11,10 @@
   font-family: inherit;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .edit-form input,
 .edit-form textarea {
   font-size: 14px;
@@ -82,6 +86,18 @@
 }
 
 .education__add-education-btn {
+  padding: 10px 20px;
+}
+
+.education__line-break {
+  margin-bottom: 30px;
+  border-color: red;
+}
+
+.education__remove-education-btn {
+  margin-left: auto;
+  margin-bottom: 20px;
+  display: block;
   padding: 10px 20px;
 }
 
