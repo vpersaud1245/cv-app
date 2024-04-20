@@ -90,7 +90,7 @@ button:hover {
 }
 
 .education__line-break {
-  margin-bottom: 30px;
+  margin: 30px 0;
   border-color: red;
 }
 
@@ -136,6 +136,25 @@ button:hover {
 
 .work-experience__add-experience-btn {
   padding: 10px 20px;
+}
+
+.work-experience__line-break {
+  margin: 30px 0;
+  border-color: red;
+}
+
+.work-exprerience__remove-experience-btn {
+  margin-left: auto;
+  margin-bottom: 20px;
+  display: block;
+  padding: 10px 20px;
+}
+
+.work-experience__end-date--current {
+  background-color: rgb(163, 163, 163);
+  pointer-events: none;
+  border: 1px solid gray;
+  border-radius: 2px;
 }
 
 .skills__add-skill-btn {

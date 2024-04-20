@@ -19,6 +19,7 @@ export default function ResumeBuilder() {
     "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui quod fuga corrupti quam laboriosam obcaecati provident, iure ducimus similique voluptatum commodi labore. Sunt perspiciatis odio nulla vero, itaque nam architecto."
   );
 
+  // Education section
   const educationSection = [];
   const [numOfEducationSections, setNumOfEducationSections] = useState(1);
   const [educationData, setEducationData] = useState([
@@ -133,6 +134,88 @@ export default function ResumeBuilder() {
     );
   }
 
+  // Experience section
+  const experienceSection = [];
+  const [numOfExperienceSections, setNumOfExperienceSections] = useState(1);
+  for (let i = 1; i <= numOfExperienceSections; i += 1) {
+    experienceSection.push(
+      <div className="work-experience__experience-section">
+        {i > 1 && (
+          <button
+            className="work-exprerience__remove-experience-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              setNumOfExperienceSections(numOfExperienceSections - 1);
+            }}
+          >
+            Remove
+          </button>
+        )}
+        <input
+          type="text"
+          className="work-experience__company-input"
+          placeholder="Company"
+        />
+        <input
+          type="text"
+          className="work-experience__position-input"
+          placeholder="Position"
+        />
+        <textarea
+          name="responsibilities-input"
+          className="work-experience__responsibility-input"
+          cols="50"
+          rows="4"
+          placeholder="Responsibility"
+        ></textarea>
+        <div className="work-experience__current-role-wrapper">
+          <input
+            type="checkbox"
+            className="work-experience__is-current-job"
+            id="work-experience__is-current-job"
+            onChange={(e) => {
+              console.log(e);
+              if (e.target.checked === true) {
+                e.target.parentElement.nextElementSibling.lastChild.lastChild.classList.remove(
+                  "work-experience__end-date"
+                );
+                e.target.parentElement.nextElementSibling.lastChild.lastChild.classList.add(
+                  "work-experience__end-date--current"
+                );
+              } else if (e.target.checked === false) {
+                e.target.parentElement.nextElementSibling.lastChild.lastChild.classList.remove(
+                  "work-experience__end-date--current"
+                );
+                e.target.parentElement.nextElementSibling.lastChild.lastChild.classList.add(
+                  "work-experience__end-date"
+                );
+              }
+            }}
+          />
+          <label htmlFor="work-experience__is-current-job">
+            I am currently working in this role
+          </label>
+        </div>
+        <div className="work-experience__date-wrapper">
+          <div className="work-experience__start-date-wrapper">
+            <label htmlFor="work-experience__start-date">Start Date</label>
+            <input
+              type="date"
+              className="work-experience__start-date"
+              id="work-experience__start-date"
+            />
+          </div>
+          <div className="work-experience__end-date-wrapper">
+            <label htmlFor="work-experience__end-date">End Date</label>
+            <input type="date" className="work-experience__end-date" />
+          </div>
+        </div>
+        {numOfExperienceSections > 1 && (
+          <hr className="work-experience__line-break"></hr>
+        )}
+      </div>
+    );
+  }
   return (
     <div className="resume-wrapper">
       <div className="edit-form">
@@ -219,54 +302,18 @@ export default function ResumeBuilder() {
 
         <form action="" className="edit-form__work-experience">
           <h1 className="form__title">Work Experience</h1>
-          <input
-            type="text"
-            className="work-experience__company-input"
-            placeholder="Company"
-          />
-          <input
-            type="text"
-            className="work-experience__position-input"
-            placeholder="Position"
-          />
-          <textarea
-            name="responsibilities-input"
-            className="work-experience__responsibility-input"
-            cols="50"
-            rows="4"
-            placeholder="Responsibility"
-          ></textarea>
-          <div className="work-experience__current-role-wrapper">
-            <input
-              type="checkbox"
-              className="work-experience__is-current-job"
-              id="work-experience__is-current-job"
-            />
-            <label htmlFor="work-experience__is-current-job">
-              I am currently working in this role
-            </label>
-          </div>
-          <div className="work-experience__date-wrapper">
-            <div className="work-experience__start-date-wrapper">
-              <label htmlFor="work-experience__start-date">Start Date</label>
-              <input
-                type="date"
-                className="work-experience__start-date"
-                id="work-experience__start-date"
-              />
-            </div>
-            <div className="work-experience__end-date-wrapper">
-              <label htmlFor="work-experience__end-date">End Date</label>
-              <input
-                type="date"
-                className="work-experience__end-date"
-                id="work-experience__end-date"
-              />
-            </div>
-          </div>
-          <button className="work-experience__add-experience-btn">
-            + Add more work experience
-          </button>
+          {experienceSection}
+          {numOfExperienceSections < 3 && (
+            <button
+              className="work-experience__add-experience-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                setNumOfExperienceSections(numOfExperienceSections + 1);
+              }}
+            >
+              + Add more work experience
+            </button>
+          )}
         </form>
 
         <form action="" className="edit-form__skills">

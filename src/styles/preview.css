@@ -67,6 +67,10 @@ hr {
   font-weight: 500;
 }
 
+.profile__content {
+  word-break: break-word;
+}
+
 .main-content--left {
   display: flex;
   flex-direction: column;
