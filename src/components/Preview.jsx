@@ -73,29 +73,36 @@ function Skills() {
   );
 }
 
-function WorkExperience() {
+function WorkExperience({ workExperienceData }) {
+  const workExperienceItems = workExperienceData.map((workExperienceObj) => (
+    <div className="experience__item" key={workExperienceObj.id}>
+      <div className="work-experience__position-and-dates">
+        <span className="position-and-dates__position">
+          {workExperienceObj.position}
+        </span>
+        <div className="position-and-dates__dates">
+          <span className="dates__start">{workExperienceObj.start}</span>
+          <span>-</span>
+          <span className="dates__end">{workExperienceObj.end}</span>
+        </div>
+      </div>
+      <h2 className="work-experience__company-name">
+        {workExperienceObj.companyName}
+      </h2>
+      <p className="work-experience__description">
+        {workExperienceObj.description}
+      </p>
+    </div>
+  ));
   return (
     <div className="main-content__work-experience">
       <h1 className="content__title">WORK EXPERIENCE</h1>
-      <div className="work-experience__position-and-dates">
-        <span className="position-and-dates__position">POSITION</span>
-        <div className="position-and-dates__dates">
-          <span className="dates__start">START</span>
-          <span className="dates__end">END</span>
-        </div>
-      </div>
-      <h2 className="work-experience__company-name">COMPANY NAME</h2>
-      <p className="work-experience__description">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem ratione
-        eius, eaque tempore voluptatem, soluta nesciunt voluptatibus, modi
-        architecto itaque nobis neque amet impedit voluptates deserunt quibusdam
-        corrupti.
-      </p>
+      <div className="work-experience__items">{workExperienceItems}</div>
     </div>
   );
 }
 
-function MainContent({ profileContent, educationData }) {
+function MainContent({ profileContent, educationData, workExperienceData }) {
   return (
     <div className="preview__main-content">
       <div className="main-content--left">
@@ -106,7 +113,7 @@ function MainContent({ profileContent, educationData }) {
       </div>
       <div className="vl"></div>
       <div className="main-content--right">
-        <WorkExperience />
+        <WorkExperience workExperienceData={workExperienceData} />
       </div>
     </div>
   );
@@ -118,6 +125,7 @@ export default function Preview({
   professionalTitle,
   profileContent,
   educationData,
+  workExperienceData,
 }) {
   return (
     <div className="preview">
@@ -129,6 +137,7 @@ export default function Preview({
       <MainContent
         profileContent={profileContent}
         educationData={educationData}
+        workExperienceData={workExperienceData}
       />
     </div>
   );

@@ -136,16 +136,29 @@ export default function ResumeBuilder() {
 
   // Experience section
   const experienceSection = [];
-  const [numOfExperienceSections, setNumOfExperienceSections] = useState(1);
-  for (let i = 1; i <= numOfExperienceSections; i += 1) {
+  const [numOfExperienceSections, setNumOfExperienceSections] = useState(0);
+  const [workExperienceData, setWorkExperienceData] = useState([
+    {
+      id: 0,
+      position: "Position",
+      start: "Start",
+      end: "End",
+      companyName: "Company Name",
+      description:
+        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem rationeeius, eaque tempore voluptatem, soluta nesciunt voluptatibus, modiarchitecto itaque nobis neque amet impedit voluptates deserunt quibusdamcorrupti.",
+    },
+  ]);
+  for (let i = 0; i <= numOfExperienceSections; i += 1) {
     experienceSection.push(
-      <div className="work-experience__experience-section">
-        {i > 1 && (
+      <div className="work-experience__experience-section" key={i}>
+        {i > 0 && (
           <button
             className="work-exprerience__remove-experience-btn"
             onClick={(e) => {
               e.preventDefault();
               setNumOfExperienceSections(numOfExperienceSections - 1);
+              setWorkExperienceData(workExperienceData.toSpliced(i, 1));
+              educationSection.splice(i, 1);
             }}
           >
             Remove
@@ -155,6 +168,22 @@ export default function ResumeBuilder() {
           type="text"
           className="work-experience__company-input"
           placeholder="Company"
+          onChange={(e) => {
+            const changedWorkExperienceData = workExperienceData.map(
+              (workExperienceObj) => {
+                if (workExperienceObj.id === i) {
+                  return {
+                    ...workExperienceObj,
+                    companyName:
+                      e.target.value.length > 0
+                        ? e.target.value
+                        : "Company Name",
+                  };
+                } else return workExperienceObj;
+              }
+            );
+            setWorkExperienceData(changedWorkExperienceData);
+          }}
         />
         <input
           type="text"
@@ -210,7 +239,7 @@ export default function ResumeBuilder() {
             <input type="date" className="work-experience__end-date" />
           </div>
         </div>
-        {numOfExperienceSections > 1 && (
+        {numOfExperienceSections > 0 && (
           <hr className="work-experience__line-break"></hr>
         )}
       </div>
@@ -282,7 +311,7 @@ export default function ResumeBuilder() {
               className="education__add-education-btn"
               onClick={(e) => {
                 e.preventDefault();
-                setNumOfEducationSections(numOfEducationSections + 1);
+                setNumOfEducationSections(2);
                 setEducationData([
                   ...educationData,
                   {
@@ -303,12 +332,25 @@ export default function ResumeBuilder() {
         <form action="" className="edit-form__work-experience">
           <h1 className="form__title">Work Experience</h1>
           {experienceSection}
-          {numOfExperienceSections < 3 && (
+          {numOfExperienceSections < 2 && (
             <button
               className="work-experience__add-experience-btn"
               onClick={(e) => {
                 e.preventDefault();
-                setNumOfExperienceSections(numOfExperienceSections + 1);
+                const experienceSections = numOfExperienceSections + 1;
+                setNumOfExperienceSections(experienceSections);
+                setWorkExperienceData([
+                  ...workExperienceData,
+                  {
+                    id: experienceSections,
+                    position: "Position",
+                    start: "Start",
+                    end: "End",
+                    companyName: "Company Name",
+                    description:
+                      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem rationeeius, eaque tempore voluptatem, soluta nesciunt voluptatibus, modiarchitecto itaque nobis neque amet impedit voluptates deserunt quibusdamcorrupti.",
+                  },
+                ]);
               }}
             >
               + Add more work experience
@@ -353,6 +395,7 @@ export default function ResumeBuilder() {
         professionalTitle={professionalTitle}
         profileContent={profileContent}
         educationData={educationData}
+        workExperienceData={workExperienceData}
       />
     </div>
   );

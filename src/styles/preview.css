@@ -103,6 +103,16 @@ hr {
   color: gray;
 }
 
+.work-experience__items {
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+}
+
+.main-content__work-experience > .content__title {
+  margin-bottom: 8px;
+}
+
 .work-experience__position-and-dates {
   display: flex;
   justify-content: space-between;
@@ -110,7 +120,7 @@ hr {
 
 .position-and-dates__dates {
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 
 .work-experience__company-name {
