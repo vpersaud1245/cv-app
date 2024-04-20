@@ -89,10 +89,7 @@ function WorkExperience() {
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem ratione
         eius, eaque tempore voluptatem, soluta nesciunt voluptatibus, modi
         architecto itaque nobis neque amet impedit voluptates deserunt quibusdam
-        corrupti. Consequuntur, ex? Lorem ipsum, dolor sit amet consectetur
-        adipisicing elit. Reiciendis blanditiis id eos veniam ea illum pariatur
-        quae distinctio odio amet eligendi aliquam, molestiae repudiandae
-        aliquid eius cumque nobis ipsa alias.
+        corrupti.
       </p>
     </div>
   );

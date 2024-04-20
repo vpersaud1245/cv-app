@@ -71,6 +71,16 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  width: 35%;
+}
+
+.main-content--right {
+  width: 65%;
+}
+
+.contact__address,
+.contact__email {
+  word-break: break-word;
 }
 
 .education__item {
