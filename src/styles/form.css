@@ -92,6 +92,11 @@ button:hover {
   font-weight: 600;
 }
 
+.education__start-date-wrapper > input:hover,
+.education__end-date-wrapper > input:hover {
+  cursor: pointer;
+}
+
 .education__add-education-btn {
   padding: 10px 20px;
 }
@@ -142,6 +147,11 @@ button:hover {
   font-weight: 600;
 }
 
+.work-experience__end-date-wrapper > input:hover,
+.work-experience__start-date-wrapper > input:hover {
+  cursor: pointer;
+}
+
 .work-experience__add-experience-btn {
   padding: 10px 20px;
 }
@@ -164,6 +174,10 @@ button:hover {
   pointer-events: none;
   border: 1px solid gray;
   border-radius: 2px;
+}
+
+.work-experience__end-date--current:hover {
+  cursor: not-allowed;
 }
 
 .skill-section {
