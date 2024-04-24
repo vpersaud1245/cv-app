@@ -4,7 +4,7 @@
   width: 60%;
   overflow: scroll;
   font-family: "Montserrat", sans-serif;
-  padding: 20px 60px;
+  padding: 20px;
 }
 
 .edit-form * {
@@ -26,9 +26,16 @@ button:hover {
   box-sizing: border-box;
 }
 
+.edit-form form {
+  background-color: rgb(235, 235, 235);
+  padding: 20px 20px 20px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
 .form__title {
   font-size: 20px;
-  margin: 25px 0 10px 0;
+  margin: 0 0 10px 0;
 }
 
 .edit-form__personal-information {
@@ -92,6 +99,7 @@ button:hover {
 .education__line-break {
   margin: 30px 0;
   border-color: red;
+  border-width: 2px;
 }
 
 .education__remove-education-btn {
@@ -141,6 +149,7 @@ button:hover {
 .work-experience__line-break {
   margin: 30px 0;
   border-color: red;
+  border-width: 2px;
 }
 
 .work-exprerience__remove-experience-btn {
