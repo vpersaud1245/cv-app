@@ -189,6 +189,20 @@ export default function ResumeBuilder() {
           type="text"
           className="work-experience__position-input"
           placeholder="Position"
+          onChange={(e) => {
+            const changedWorkExperienceData = workExperienceData.map(
+              (workExperienceObj) => {
+                if (workExperienceObj.id === i) {
+                  return {
+                    ...workExperienceObj,
+                    position:
+                      e.target.value.length > 0 ? e.target.value : "Position",
+                  };
+                } else return workExperienceObj;
+              }
+            );
+            setWorkExperienceData(changedWorkExperienceData);
+          }}
         />
         <textarea
           name="responsibilities-input"
@@ -196,6 +210,22 @@ export default function ResumeBuilder() {
           cols="50"
           rows="4"
           placeholder="Responsibility"
+          onChange={(e) => {
+            const changedWorkExperienceData = workExperienceData.map(
+              (workExperienceObj) => {
+                if (workExperienceObj.id === i) {
+                  return {
+                    ...workExperienceObj,
+                    description:
+                      e.target.value.length > 0
+                        ? e.target.value
+                        : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem rationeeius, eaque tempore voluptatem, soluta nesciunt voluptatibus, modiarchitecto itaque nobis neque amet impedit voluptates deserunt quibusdamcorrupti.",
+                  };
+                } else return workExperienceObj;
+              }
+            );
+            setWorkExperienceData(changedWorkExperienceData);
+          }}
         ></textarea>
         <div className="work-experience__current-role-wrapper">
           <input
@@ -203,7 +233,6 @@ export default function ResumeBuilder() {
             className="work-experience__is-current-job"
             id="work-experience__is-current-job"
             onChange={(e) => {
-              console.log(e);
               if (e.target.checked === true) {
                 e.target.parentElement.nextElementSibling.lastChild.lastChild.classList.remove(
                   "work-experience__end-date"
@@ -211,6 +240,20 @@ export default function ResumeBuilder() {
                 e.target.parentElement.nextElementSibling.lastChild.lastChild.classList.add(
                   "work-experience__end-date--current"
                 );
+                const dateEndInput =
+                  e.target.parentElement.nextElementSibling.lastChild.lastChild;
+                dateEndInput.value = "";
+                const changedWorkExperienceData = workExperienceData.map(
+                  (workExperienceObj) => {
+                    if (workExperienceObj.id === i) {
+                      return {
+                        ...workExperienceObj,
+                        end: "Present",
+                      };
+                    } else return workExperienceObj;
+                  }
+                );
+                setWorkExperienceData(changedWorkExperienceData);
               } else if (e.target.checked === false) {
                 e.target.parentElement.nextElementSibling.lastChild.lastChild.classList.remove(
                   "work-experience__end-date--current"
@@ -218,6 +261,21 @@ export default function ResumeBuilder() {
                 e.target.parentElement.nextElementSibling.lastChild.lastChild.classList.add(
                   "work-experience__end-date"
                 );
+                const changedWorkExperienceData = workExperienceData.map(
+                  (workExperienceObj) => {
+                    if (workExperienceObj.id === i) {
+                      const dateEndInput =
+                        e.target.parentElement.nextElementSibling.lastChild
+                          .lastChild;
+                      dateEndInput.value = "";
+                      return {
+                        ...workExperienceObj,
+                        end: "end",
+                      };
+                    } else return workExperienceObj;
+                  }
+                );
+                setWorkExperienceData(changedWorkExperienceData);
               }
             }}
           />
@@ -232,11 +290,46 @@ export default function ResumeBuilder() {
               type="date"
               className="work-experience__start-date"
               id="work-experience__start-date"
+              onChange={(e) => {
+                const changedWorkExperienceData = workExperienceData.map(
+                  (workExperienceObj) => {
+                    if (workExperienceObj.id === i) {
+                      return {
+                        ...workExperienceObj,
+                        start:
+                          e.target.value.length > 0
+                            ? formatDate(e.target.value)
+                            : "start",
+                      };
+                    } else return workExperienceObj;
+                  }
+                );
+                setWorkExperienceData(changedWorkExperienceData);
+              }}
             />
           </div>
           <div className="work-experience__end-date-wrapper">
             <label htmlFor="work-experience__end-date">End Date</label>
-            <input type="date" className="work-experience__end-date" />
+            <input
+              type="date"
+              className="work-experience__end-date"
+              onChange={(e) => {
+                const changedWorkExperienceData = workExperienceData.map(
+                  (workExperienceObj) => {
+                    if (workExperienceObj.id === i) {
+                      return {
+                        ...workExperienceObj,
+                        end:
+                          e.target.value.length > 0
+                            ? formatDate(e.target.value)
+                            : "end",
+                      };
+                    } else return workExperienceObj;
+                  }
+                );
+                setWorkExperienceData(changedWorkExperienceData);
+              }}
+            />
           </div>
         </div>
         {numOfExperienceSections > 0 && (
