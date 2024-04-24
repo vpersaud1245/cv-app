@@ -10,7 +10,23 @@ function formatDate(inputDate) {
   return `${month}/${year}`; // Return the formatted date
 }
 
+function formatWithDashes(inputValue) {
+  const regex = /[0-9]/;
+  let formattedValue = "";
+
+  for (let i = 0; i < inputValue.length; i++) {
+    if (regex.test(inputValue[i])) {
+      if (formattedValue.length === 3 || formattedValue.length === 7) {
+        formattedValue += "-";
+      }
+      formattedValue += inputValue[i];
+    }
+  }
+  return formattedValue;
+}
+
 export default function ResumeBuilder() {
+  // Personal Information Section
   const [firstName, setFirstName] = useState("First");
   const [lastName, setLastName] = useState("Last");
   const [professionalTitle, setProfessionalTitle] =
@@ -338,6 +354,80 @@ export default function ResumeBuilder() {
       </div>
     );
   }
+
+  // Skills section
+  const skillsSection = [];
+  const [numOfSkillSections, setNumOfSkillSections] = useState(0);
+  const [skillData, setSkillData] = useState([{ id: 0, skill: "Skill" }]);
+  for (let i = 0; i <= numOfSkillSections; i += 1) {
+    skillsSection.push(
+      <div className="skill-section">
+        {i === 0 ? (
+          <input
+            className="skills__skill-input"
+            type="text"
+            placeholder="Skill"
+            onChange={(e) => {
+              const changedSkillData = skillData.map((skillObj) => {
+                if (skillObj.id === i) {
+                  return {
+                    ...skillObj,
+                    skill: e.target.value.length > 0 ? e.target.value : "Skill",
+                  };
+                } else {
+                  return skillObj;
+                }
+              });
+              setSkillData(changedSkillData);
+            }}
+          />
+        ) : (
+          <input
+            className="skills__skill-input no-border-right"
+            type="text"
+            placeholder="Skill"
+            onChange={(e) => {
+              const changedSkillData = skillData.map((skillObj) => {
+                if (skillObj.id === i) {
+                  return {
+                    ...skillObj,
+                    skill:
+                      e.target.value.length > 0
+                        ? e.target.value
+                        : `Skill ${i + 1}`,
+                  };
+                } else {
+                  return skillObj;
+                }
+              });
+              setSkillData(changedSkillData);
+            }}
+          />
+        )}
+        {i > 0 && (
+          <button
+            className="skills__skill-remove-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              const changedNumOfSkillSections = numOfSkillSections - 1;
+              setNumOfSkillSections(changedNumOfSkillSections);
+              setSkillData(skillData.toSpliced(i, 1));
+              skillsSection.splice(i, 1);
+            }}
+          >
+            X
+          </button>
+        )}
+      </div>
+    );
+  }
+
+  // Contact Section
+  const [contactData, setContactData] = useState({
+    address: "123 FOR US ALL ST, LAGOS, NIGERIA",
+    email: "thisismyname@thisismyemail.com",
+    phone: "123-456-7890",
+  });
   return (
     <div className="resume-wrapper">
       <div className="edit-form">
@@ -453,12 +543,26 @@ export default function ResumeBuilder() {
 
         <form action="" className="edit-form__skills">
           <h1 className="form__title">Skills</h1>
-          <input
-            className="skills__skill-input"
-            type="text"
-            placeholder="Skill"
-          />
-          <button className="skills__add-skill-btn">+ Add more skills</button>
+          {skillsSection}
+          {numOfSkillSections < 4 && (
+            <button
+              className="skills__add-skill-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                const skillSections = numOfSkillSections + 1;
+                setNumOfSkillSections(skillSections);
+                setSkillData([
+                  ...skillData,
+                  {
+                    id: skillSections,
+                    skill: "Skill",
+                  },
+                ]);
+              }}
+            >
+              + Add more skills
+            </button>
+          )}
         </form>
 
         <form action="" className="edit-form__contact">
@@ -467,18 +571,52 @@ export default function ResumeBuilder() {
             <input
               type="tel"
               className="contact__phone-input"
-              placeholder="Phone"
+              placeholder="Phone (No dashes)"
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                const lastEnteredChar = inputValue.slice(-1);
+                const regex = /[0-9]/;
+
+                if (!regex.test(lastEnteredChar) || inputValue.length > 10) {
+                  e.target.value = inputValue.slice(0, -1); // Remove the last character
+                }
+                setContactData({
+                  ...contactData,
+                  phone:
+                    e.target.value > 0
+                      ? formatWithDashes(e.target.value)
+                      : "123-456-7890",
+                });
+              }}
             />
             <input
               type="email"
               className="contact__email-input"
               placeholder="Email"
+              onChange={(e) => {
+                setContactData({
+                  ...contactData,
+                  email:
+                    e.target.value.length > 0
+                      ? e.target.value
+                      : "thisismyname@thisismyemail.com",
+                });
+              }}
             />
           </div>
           <input
             type="text"
             className="contact__address-input"
             placeholder="Address"
+            onChange={(e) => {
+              setContactData({
+                ...contactData,
+                address:
+                  e.target.value.length > 0
+                    ? e.target.value
+                    : "123 FOR US ALL ST, LAGOS, NIGERIA",
+              });
+            }}
           />
         </form>
       </div>
@@ -489,6 +627,8 @@ export default function ResumeBuilder() {
         profileContent={profileContent}
         educationData={educationData}
         workExperienceData={workExperienceData}
+        skillData={skillData}
+        contactData={contactData}
       />
     </div>
   );

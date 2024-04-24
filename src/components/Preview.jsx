@@ -30,13 +30,13 @@ function Profile({ profileContent }) {
   );
 }
 
-function Contact() {
+function Contact({ contactData }) {
   return (
     <div className="main-content__contact">
       <h1 className="content__title">CONTACT</h1>
-      <div className="contact__address">123 FOR US ALL ST, LAGOS, NIGERIA</div>
-      <div className="contact__email">thisismyname@thisismyemail.com</div>
-      <div className="contact__phone">123-456-7890</div>
+      <div className="contact__address">{contactData.address}</div>
+      <div className="contact__email">{contactData.email}</div>
+      <div className="contact__phone">{contactData.phone}</div>
     </div>
   );
 }
@@ -61,14 +61,16 @@ function Education({ educationData }) {
   );
 }
 
-function Skills() {
+function Skills({ skillData }) {
+  const skillItems = skillData.map((skillObj) => (
+    <li className="skills-list__item" key={skillObj.id}>
+      {skillObj.skill}
+    </li>
+  ));
   return (
     <div className="main-content__skills">
       <h1 className="content__title">SKILLS</h1>
-      <ul className="skills__list">
-        <li className="skills-list__item">Skill 1</li>
-        <li className="skills-list__item">Skill 2</li>
-      </ul>
+      <ul className="skills__list">{skillItems}</ul>
     </div>
   );
 }
@@ -102,14 +104,20 @@ function WorkExperience({ workExperienceData }) {
   );
 }
 
-function MainContent({ profileContent, educationData, workExperienceData }) {
+function MainContent({
+  profileContent,
+  educationData,
+  workExperienceData,
+  skillData,
+  contactData,
+}) {
   return (
     <div className="preview__main-content">
       <div className="main-content--left">
         <Profile profileContent={profileContent} />
-        <Contact />
+        <Contact contactData={contactData} />
         <Education educationData={educationData} />
-        <Skills />
+        <Skills skillData={skillData} />
       </div>
       <div className="vl"></div>
       <div className="main-content--right">
@@ -126,6 +134,8 @@ export default function Preview({
   profileContent,
   educationData,
   workExperienceData,
+  skillData,
+  contactData,
 }) {
   return (
     <div className="preview">
@@ -138,6 +148,8 @@ export default function Preview({
         profileContent={profileContent}
         educationData={educationData}
         workExperienceData={workExperienceData}
+        skillData={skillData}
+        contactData={contactData}
       />
     </div>
   );

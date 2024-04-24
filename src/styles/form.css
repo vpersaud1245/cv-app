@@ -157,9 +157,29 @@ button:hover {
   border-radius: 2px;
 }
 
+.skill-section {
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.skills__skill-input {
+  border: 1px solid gray;
+}
+
 .skills__add-skill-btn {
   margin-top: 20px;
   padding: 10px 20px;
+}
+
+.skills__skill-remove-btn {
+  border: 1px solid gray;
+  width: 10%;
+}
+
+.no-border-right {
+  border-right: none;
+  border-width: 1px;
+  border-color: gray;
 }
 
 .contact__phone-email-wrapper {
