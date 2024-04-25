@@ -210,3 +210,26 @@ button:hover {
   gap: 10px;
   margin-bottom: 10px;
 }
+
+@media (width < 1100px) {
+  .edit-form {
+    width: 100%;
+    overflow: visible;
+  }
+}
+
+@media (width < 500px) {
+  .edit-form {
+    width: 80%;
+  }
+
+  .education__date-wrapper,
+  .work-experience__date-wrapper,
+  .personal-information__full-name-wrapper {
+    flex-wrap: wrap;
+  }
+
+  .form__title {
+    text-align: center;
+  }
+}
