@@ -138,7 +138,7 @@ export default function Preview({
   contactData,
 }) {
   return (
-    <div className="preview">
+    <div className="preview" id="printable-area">
       <PersonalInformation
         firstName={firstName}
         lastName={lastName}

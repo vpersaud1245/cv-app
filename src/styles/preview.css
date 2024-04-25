@@ -142,3 +142,58 @@ hr {
     box-sizing: border-box;
   }
 }
+
+@media print {
+  @page {
+    margin: 0;
+  }
+
+  .edit-form,
+  .edit-form__print-btn {
+    display: none;
+  }
+
+  .resume-wrapper {
+    height: 27.94cm;
+    width: 21.95cm;
+    display: block;
+    padding: 0;
+  }
+
+  .preview {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    max-width: 100%;
+    max-height: 100%;
+    border: none;
+  }
+
+  .personal-information__professional-title,
+  .preview__main-content,
+  .content__title,
+  .education__degree,
+  .education__school,
+  .education__dates,
+  .work-experience__company-name {
+    font-size: 12px;
+  }
+
+  .work-experience__items {
+    justify-content: space-evenly;
+  }
+
+  .experience__item {
+    margin-top: 10px;
+  }
+
+  .work-experience__items * {
+    font-size: 12px;
+  }
+
+  .content__title {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+}
